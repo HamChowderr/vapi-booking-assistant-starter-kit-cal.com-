@@ -1,7 +1,12 @@
 const dotenv = require("dotenv");
-dotenv.config;
+dotenv.config();
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  webpack: (config) => {
+    config.resolve.alias['@'] = require('path').resolve(__dirname, 'src');
+    return config;
+  },
+};
 
 module.exports = nextConfig;

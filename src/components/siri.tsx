@@ -4,8 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Mic, PhoneCall } from 'lucide-react';
 import ReactSiriwave, { IReactSiriwaveProps } from 'react-siriwave';
 import { motion, AnimatePresence } from 'framer-motion';
-import useVapi from '@/hooks/use-vapi'; // Adjust the import path as needed
-import Button from "@/components/ui/button"; // Corrected import for default export
+import useVapi from '@/hooks/use-vapi'; // Ensure the hook is correctly implemented
 
 // Define CurveStyle type
 type CurveStyle = "ios" | "ios9";
@@ -56,7 +55,7 @@ const Siri: React.FC<SiriProps> = ({ theme }) => {
           initial={{ x: 0 }}
           animate={{ x: isSessionActive ? -40 : 0 }}
           transition={{ duration: 0.3 }}
-          style={{ zIndex: 10, position: 'relative' } as React.CSSProperties} // Cast zIndex here
+          style={{ zIndex: 10, position: 'relative' }}
         >
           <AnimatePresence>
             {!isSessionActive ? (
@@ -81,7 +80,7 @@ const Siri: React.FC<SiriProps> = ({ theme }) => {
           animate={{ width: '100%', opacity: 1 }}
           exit={{ width: 0, opacity: 0 }}
           transition={{ duration: 0.3 }}
-          style={{ marginLeft: '10px' } as React.CSSProperties} // Cast marginLeft here
+          style={{ marginLeft: '10px' }}
         >
           <ReactSiriwave {...siriWaveConfig} />
         </motion.div>

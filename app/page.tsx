@@ -1,21 +1,11 @@
 "use client";
 
-import useVapi from "../hooks/use-vapi"; // Import VAPI hook
-import Siri from "../components/siri"; // Import Siri component
-import Transcriber from "../components/transcriber"; // Import Transcriber component
-import Button from "../components/ui/button"; // Import Button component
+import useVapi from "@/hooks/use-vapi"; // Import VAPI hook from hooks directory
+import Siri from "@/components/siri"; // Import Siri component
+import Transcriber from "@/components/transcriber"; // Import Transcriber component
 
 export default function Home() {
-  const {
-    volumeLevel,
-    isSessionActive,
-    conversation,
-    toggleCall,
-    sendMessage,
-    say,
-    toggleMute,
-    isMuted,
-  } = useVapi();
+  const { conversation } = useVapi(); // Only using conversation from useVapi
 
   return (
     <main className="flex flex-col items-center justify-center h-screen p-6">
@@ -32,23 +22,6 @@ export default function Home() {
       {/* Render Transcriber Component */}
       <div className="mb-8">
         <Transcriber conversation={conversation} />
-      </div>
-
-      {/* Button to Toggle Vapi Session */}
-      <div className="mt-4">
-        <Button onClick={toggleCall}>
-          {isSessionActive ? "End Call with Siri" : "Start Call with Siri"}
-        </Button>
-
-        {/* Button to Toggle Mute/Unmute */}
-        <Button onClick={toggleMute} className="ml-4">
-          {isMuted ? "Unmute" : "Mute"}
-        </Button>
-      </div>
-
-      {/* Display volume level */}
-      <div className="mt-4">
-        <p>Volume Level: {volumeLevel}</p>
       </div>
     </main>
   );
