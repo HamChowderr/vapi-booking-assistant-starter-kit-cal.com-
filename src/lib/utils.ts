@@ -1,1 +1,4 @@
-export const cn = () => "Function works!";
+export function cn(...classes: (string | undefined)[]) {
+    return classes.filter(Boolean).join(" ");
+  }
+  

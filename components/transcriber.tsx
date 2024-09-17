@@ -46,7 +46,11 @@ const AvatarFallback = React.forwardRef<
 ));
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
-function Transcriber({ conversation }: { conversation: Array<{ role: string; text: string; timestamp: string; isFinal: boolean }> }) {
+function Transcriber({
+  conversation,
+}: {
+  conversation: Array<{ role: string; text: string; timestamp: string; isFinal: boolean }>;
+}) {
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -62,18 +66,22 @@ function Transcriber({ conversation }: { conversation: Array<{ role: string; tex
       </div>
       <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4">
         {conversation.map((message, index) => (
-          <div key={index} className={`flex items-start gap-3 ${message.role === 'user' ? 'justify-end' : ''}`}>
-            {message.role === 'assistant' && (
+          <div key={index} className={`flex items-start gap-3 ${message.role === "user" ? "justify-end" : ""}`}>
+            {message.role === "assistant" && (
               <Avatar className="w-8 h-8 shrink-0">
                 <AvatarImage src="/placeholder-user.jpg" />
                 <AvatarFallback>AI</AvatarFallback>
               </Avatar>
             )}
-            <div className={`bg-${message.role === 'user' ? 'primary' : 'secondary'} px-4 py-1 rounded-lg max-w-[70%] ${message.role === 'user' ? 'text-background' : 'dark:text-foreground'}`}>
+            <div
+              className={`bg-${
+                message.role === "user" ? "primary" : "secondary"
+              } px-4 py-1 rounded-lg max-w-[70%] ${message.role === "user" ? "text-background" : "dark:text-foreground"}`}
+            >
               <p>{message.text}</p>
               <div className="text-xs text-secondary">{message.timestamp}</div>
             </div>
-            {message.role === 'user' && (
+            {message.role === "user" && (
               <Avatar className="w-8 h-8 shrink-0">
                 <AvatarImage src="/placeholder-user.jpg" />
                 <AvatarFallback>You</AvatarFallback>
@@ -87,4 +95,3 @@ function Transcriber({ conversation }: { conversation: Array<{ role: string; tex
 }
 
 export default Transcriber;
-export { Avatar, AvatarImage, AvatarFallback };
