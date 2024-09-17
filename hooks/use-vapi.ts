@@ -1,8 +1,10 @@
+"use client";
+
 import { useEffect, useRef, useState, useCallback } from "react";
 import Vapi from "@vapi-ai/web";
 
-const publicKey = process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY || ""; // Replace with your actual public key
-const assistantId = process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID || ""; // Replace with your actual assistant ID
+const publicKey = process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY || "";
+const assistantId = process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID || "";
 
 const useVapi = () => {
   const [volumeLevel, setVolumeLevel] = useState(0);
@@ -37,9 +39,8 @@ const useVapi = () => {
             const timestamp = new Date().toLocaleTimeString();
             const updatedConversation = [...prev];
             if (message.transcriptType === "final") {
-              // Find the partial message to replace it with the final one
               const partialIndex = updatedConversation.findIndex(
-                (msg) => msg.role === message.role && !msg.isFinal,
+                (msg) => msg.role === message.role && !msg.isFinal
               );
               if (partialIndex !== -1) {
                 updatedConversation[partialIndex] = {
@@ -57,9 +58,8 @@ const useVapi = () => {
                 });
               }
             } else {
-              // Add partial message or update the existing one
               const partialIndex = updatedConversation.findIndex(
-                (msg) => msg.role === message.role && !msg.isFinal,
+                (msg) => msg.role === message.role && !msg.isFinal
               );
               if (partialIndex !== -1) {
                 updatedConversation[partialIndex] = {
@@ -84,8 +84,6 @@ const useVapi = () => {
           message.functionCall.name === "changeUrl"
         ) {
           const command = message.functionCall.parameters.url.toLowerCase();
-          console.log(command);
-          // const newUrl = routes[command];
           if (command) {
             window.location.href = command;
           } else {
@@ -102,8 +100,6 @@ const useVapi = () => {
 
   useEffect(() => {
     initializeVapi();
-
-    // Cleanup function to end call and dispose Vapi instance
     return () => {
       if (vapiRef.current) {
         vapiRef.current.stop();
